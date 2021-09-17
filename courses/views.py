@@ -99,7 +99,7 @@ def admininfo(request, courses_id):
     for i in student:
         for j in i.student_courses.all():
             if j == courses_info:
-                student_name.append(i.student_user)
+                student_name.append(i.student_user.first_name)
                 student_last.append(i.student_user.last_name)
 
     return render(request, "courses/admin_info.html", {
