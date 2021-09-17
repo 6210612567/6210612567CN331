@@ -1,0 +1,32 @@
+{% extends "courses/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    body{
+        background-image: url("{% static 'images/mycourses.jpg' %}");
+        background-attachment: fixed;
+        background-position:0vmin;
+        background-size: cover;
+    }
+</style>
+
+    <h1 style="font-family: 'Hammersmith One', sans-serif;"><b class="button6">COURSES</b></h1>
+    <ul>
+    <br>
+        {% for mycourses in student_courses %}
+            <li><b style="font-size: 16px;">
+            {{ mycourses }}
+            </b></li>
+        {% empty %}
+            <li style="font-family: 'Hammersmith One', sans-serif;font-size: 18px;">
+                Empty enrollment.
+            </li>
+        {% endfor %}
+    </ul>
+    <br>
+    <br>
+
+    <a href="{% url 'users:index'%}"><button class="button4">BACK</button></a>
+
+{% endblock %}

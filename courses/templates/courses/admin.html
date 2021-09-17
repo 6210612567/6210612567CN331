@@ -1,0 +1,26 @@
+{% extends "courses/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    body {
+        background-image: url("{% static 'images/admin.jpg' %}");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: 0%;
+    }
+</style>
+
+    <div style="font-family: 'Hammersmith One', sans-serif;"><b class="button6">All courses</b></div>
+    <br>
+    <br><b><i><u>
+                {% for course in allcourses %}
+                <li>
+                    <a href="{% url 'courses:admininfo' course.courses_id %}">{{course}}</a>
+                </li>
+                {% endfor %}
+    </b></i></u>
+    <br>
+    <a href="{% url 'users:index'%}"><button class="button4">Home</button></a>
+
+{% endblock %}

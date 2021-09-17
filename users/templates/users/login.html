@@ -1,0 +1,44 @@
+{% extends 'users/layout.html' %}
+{% load static%}
+{% block body %}
+
+<style>
+    body{
+        background-image: url("{% static 'images/users_login.jpg' %}");
+        background-attachment: fixed;
+        background-position:0%;
+        background-size: cover;
+    }
+</style>
+
+	{% if messages %}
+        {% for message in messages %}
+        <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+<h2></h2>
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form action="{% url 'users:login' %}" method="post">
+			{% csrf_token %}
+			<h1>Sign in</h1>
+			<br>
+			<input type="text" name="username" placeholder="Username">
+			<br>
+			<input type="password" name="password" placeholder="Password">
+			<br>
+			<button class="button">Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1><b>Hello, Student!</b></h1>
+				<p>Enter your courses and start journey with us</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

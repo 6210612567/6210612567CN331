@@ -1,0 +1,32 @@
+{% extends "courses/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    body{
+        background-image: url("{% static 'images/coursesinfo.jpg' %}");
+        background-attachment: fixed;
+        background-position:0vmin;
+        background-size: cover;
+    }
+</style>
+
+    <h1 style="font-family: 'Hammersmith One', sans-serif;"><b class="button6">{{courses_info.course_code}}{{courses_info.courses_id}}</b></h1>
+    <div style="font-family: 'Hammersmith One', sans-serif;font-size: 18px;"><ul>
+        <li>Faculty        : {{courses_info.faculty}}</li>
+        <li>Courses name   : {{ courses_info.name }}</li>
+        <li>Courses id     : {{ courses_info.courses_id }}</li>
+        <li>Unit of credit : {{courses_info.credit}}</li>
+        <li>Semester       : {{ courses_info.semester}}/{{courses_info.year}}</li>
+        <li>Available      : {{ courses_info.remain }}/{{courses_info.seatquota}}</li>
+        <li>Status          : 
+        {% if check %}
+            <b style = "color: rgb(177, 31, 31);">CLOSE</b>
+        {% else %}
+            <b style = "color: rgb(35, 131, 35);">OPEN</b>
+        {% endif %}
+        </li>
+    </ul></div>
+    <a href="{% url 'courses:index'%}"><button class="button4">BACK</button></a>
+
+{% endblock %}

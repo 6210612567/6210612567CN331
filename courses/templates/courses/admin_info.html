@@ -1,0 +1,55 @@
+{% extends "courses/layout.html" %}
+{% load static %}
+{% block body %}
+
+<style>
+    body {
+        background-image: url("{% static 'images/admin_info.jpg' %}");
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: 0%;
+    }
+</style>
+
+    <h1>
+        <div style="font-family: 'Hammersmith One', sans-serif;" class="button6"><b>{{courses_info.course_code}}{{courses_info.courses_id}}</b></div>
+    </h1>
+    <ul style="color: rgb(0, 0, 0); font-size: 18px; font-family: 'Hammersmith One', sans-serif;">
+        <li>Faculty        : {{courses_info.faculty}}</li>
+        <li>Courses name   : {{ courses_info.name }}</li>
+        <li>Courses id     : {{ courses_info.courses_id }}</li>
+        <li>Unit of credit : {{courses_info.credit}}</li>
+        <li>Semester       : {{ courses_info.semester}}/{{courses_info.year}}</li>
+        <li>Available      : {{ courses_info.remain }}/{{courses_info.seatquota}}</li>
+        <li>Status :
+        {% if check %}
+            <b style = "color: rgb(177, 31, 31);">CLOSE</b>
+        {% else %}
+            <b style = "color: rgb(35, 131, 35);">OPEN</b>
+        {% endif %}
+        </li>
+    </ul>
+
+    <h2>
+        <div style="font-family: 'Hammersmith One', sans-serif;" class="button6"><b>Student names</b></div>
+    </h2>
+    <div style="font-family: 'Hammersmith One', sans-serif;font-size: 18px;">
+        <ul style="color: rgb(0, 0, 0);">
+            {%for name in student_name %}
+            <li>
+                {{name}}
+            {%endfor%}
+            
+            {%for last in student_last %}
+                {{last}}
+            </li>
+            {%empty%}
+            <li>
+                No student in course.
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+    
+    <a href="{% url 'courses:admin'%}"><button class="button4">BACK</button></a>
+    {% endblock %}

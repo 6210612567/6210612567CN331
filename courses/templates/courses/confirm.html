@@ -1,0 +1,26 @@
+{% extends "courses/layout.html" %}
+{% load static%}
+{% block body %}
+
+    <style>
+        body{
+            background-image: url("{% static 'images/confirm.jpg' %}");
+            background-attachment: fixed;
+            background-position:0vmin;
+            background-size: cover;
+        }
+    </style>
+
+    <h1><b>ENROLLMENT RESULT</b></h1> 
+    <br>
+    {% for c in c_courses %}
+        <li>
+            <b>{{c}}</b>
+        </li>
+    {% empty %}
+            <li>
+                <b>Empty enrollment.</b>
+            </li>
+    {% endfor %}
+    <a style="margin-top:5%;" href="{% url 'users:index'%}"><button class="button1">HOME</button></a>
+{% endblock %}

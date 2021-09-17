@@ -1,0 +1,63 @@
+{% extends "courses/layout.html" %}
+{% load static%}
+{% block body %}
+
+<style>
+    body{
+        background-image: url("{% static 'images/courses_index.jpg' %}");
+        background-attachment: fixed;
+        background-position:0vmin;
+        background-size: cover;
+    }
+</style>
+
+    <h1><b>COURSES</b></h1>
+    <br>
+    <table>
+            {% for c, check in allcourses %}
+            <tr>
+                <td><b>{{ c }}<b></td>
+                <td> &emsp;<a href="{% url 'courses:coursesinfo' c.courses_id %}"><b><i><u>INFO</u></i></b></a></td>
+                <td> &emsp;STATUS: {% if check %}
+                    <b style = "color :rgb(177, 31, 31)">CLOSE</b>
+                    <td> &emsp;&emsp;<button class = "button1 disabled">Register</button></td>
+                    {% if request.user.is_superuser %}
+                    <td><a href="{% url 'courses:c_chance' c.courses_id %} "><button class="button7">OPEN</button></a></td>
+                    {% endif %}
+                    {% else %}
+                    <b style = "color : rgb(35, 131, 35)">OPEN</b>
+                    <td> &emsp;&emsp;<a href="{% url 'courses:register' c.courses_id %}"><button class = "button1">Register</button></a></td>
+                    {% if request.user.is_superuser %}
+                    <td><a href="{% url 'courses:c_chance' c.courses_id %}"><button class="button8">CLOSE</button></a></td>
+                    {% endif %}
+                    {% endif %}
+                 </td>
+            </tr>
+            {% endfor %}
+    </table>    
+    {% if allcourses|length == 0 %}
+        No enrollment left.
+    {%endif%}
+    <br>
+    <h1><b>REGISTRATION</b></h1>
+    <br>
+    <u2>
+        {% for book in temp %}
+            <ul>
+                <b>{{ book }}</b>
+            &emsp;
+            <a href="{% url 'courses:remove' book.courses_id %}"><b style="color: rgb(177, 31, 31);"><i><u>REMOVE</b></i></u></a>
+            </ul>
+            {% empty %}
+            <ul style="font-family: 'Hammersmith One', sans-serif;font-size: 20px;">
+                No enrollments.
+            </ul>
+        {% endfor %}
+    </u2>
+    <br>
+    <br>
+    <ul>
+    <a href="{% url 'users:index'%}"><button class="button4">BACK</button></a>
+    <a href="{% url 'courses:confirm'%}"><button class="button1">Confirm</button></a>
+    </ul>
+{% endblock %}
